@@ -1,4 +1,5 @@
 # README
+https://paiza.jp/works/mondai/prob60/sort_add_9
 
 ## プログラム概要
 1行目に行数を表す整数 n、続く n 行の各行で「文字」と「整数」の組が空白区切りで入力されます。

@@ -1,4 +1,5 @@
 # README
+https://paiza.jp/works/mondai/prob60/count_string_9
 
 ## プログラム概要
 1行目で文字列 s、2行目で文字列 t が入力されます。

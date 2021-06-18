@@ -1,4 +1,5 @@
 # README
+https://paiza.jp/works/mondai/prob60/alphabets_large_or_small_9
 
 ## プログラム概要
 1行目の英大文字 X から、2行目の英大文字 Y の範囲に3行目のアルファベット C が含まれていれば"true", そうでなければ"false"と出力してください。

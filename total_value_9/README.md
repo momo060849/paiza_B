@@ -1,4 +1,5 @@
 # README
+https://paiza.jp/works/mondai/prob60/total_value_9
 
 ## プログラム概要
 2つの整数の組がn個与えられるので、各組の計算結果を足し合わせたものを出力してください。

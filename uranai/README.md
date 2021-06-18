@@ -1,4 +1,5 @@
 # README
+https://paiza.jp/works/mondai/prob60/fortune_telling_9
 
 ## プログラム概要
 次のような占いプログラムを作成してください。

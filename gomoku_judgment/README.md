@@ -1,4 +1,5 @@
 # README
+https://paiza.jp/works/mondai/prob60/tic_tac_toe_9
 
 ## プログラム概要
 5行5列の五目並べの盤面が与えられます。

@@ -1,4 +1,6 @@
 # README
+https://paiza.jp/works/mondai/prob60/5_or_more_9
+
 ## プログラム概要
 改行区切りで整数がn個入力されるので、n個の整数のうち、5以上のものをすべて足し合わせた値を出力してください。
 
