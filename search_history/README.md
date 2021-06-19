@@ -1,4 +1,5 @@
 # README
+https://paiza.jp/works/mondai/skillcheck_archive/search_history
 
 ## プログラム概要
 あなたが利用しているブラウザでは検索ワードの履歴を見ることができません。あなたは検索ワードの履歴を見られないのは不便だと思ったので、検索ワードの履歴を見る機能を自分でつくることにしました。
