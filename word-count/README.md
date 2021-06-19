@@ -1,4 +1,5 @@
 # README
+https://paiza.jp/works/mondai/skillcheck_archive/word-count
 
 ## プログラム概要
 スペースで区切られた英単語列が与えられます。
