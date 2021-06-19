@@ -1,13 +1,13 @@
 # coding: utf-8
+# 自分の得意な言語で
+# Let's チャレンジ！！
 import sys
 import pandas as pd
 from collections import defaultdict
 
-
-# 入力リスト
 lines = sys.stdin.readlines()
-#print(lines)
 
+#print(lines)
 
 # 占い結果を一時保存するリスト
 f1_u_n = []
@@ -23,10 +23,10 @@ uranai_back_data = defaultdict(str)
 f = 0
 
 
-# {"ユーザー名":[ユーザー名一覧データ], "占い結果":[占い結果一覧データ]},
-# {"占い結果":[占い結果一覧データ], "占い解釈":[占い解釈一覧データ]}
+# {id_number:(ユーザー名, 占い結果)},
+# {"占い結果":占い結果一覧データ}
 # な辞書を作る
-for i in lines:
+for id_n, i in enumerate(lines):
     ele = i.rstrip()
     #print("len: ", len(ele))
     # ユーザーデータとバックデータを識別
@@ -39,37 +39,27 @@ for i in lines:
         f_ele, s_ele = ele.split(" ")
         #print("f_ele: ", f_ele)
         #print("s_ele: ", s_ele)
-        f1_u_n.append(f_ele)
-        f1_u_r.append(s_ele)
+        uranai_user[id_n] = (f_ele, s_ele)
     # 占いバックデータを dict に格納
     elif f == 2:
         f_ele, s_ele = ele.split(" ")
         #print("f_ele: ", f_ele)
         #print("s_ele: ", s_ele)
-        f2_u_r.append(f_ele)
-        f2_u_ex.append(s_ele)
+        uranai_back_data[f_ele] = s_ele
 
-uranai_user["user_name"] = f1_u_n
-uranai_user["uranai_result"] = f1_u_r
-
-uranai_back_data["uranai_result"] = f2_u_r
-uranai_back_data["uranai_explanation"] = f2_u_ex
-
-#print(uranai_user)
-#print(uranai_back_data)
-
-
-# "uranai_result"をキーにして2つのテーブルを結合
-uranai_user_df = pd.DataFrame(uranai_user)
+# 入力された順番を崩さないように dataframe に格納
+uranai_user_df = pd.DataFrame(uranai_user.values(), index = uranai_user.keys(),
+                              columns=["user_name","uranai_result"])
 #print(uranai_user_df)
 
-uranai_back_data_df = pd.DataFrame(uranai_back_data)
+uranai_back_data_df = pd.DataFrame(uranai_back_data.items(),
+                                   columns=["uranai_result","uranai_explanation"])
 #print(uranai_back_data_df)
 
-uranai_db = pd.merge(uranai_user_df, uranai_back_data_df, on='uranai_result')
+uranai_db = pd.merge(uranai_user_df, uranai_back_data_df, on='uranai_result', how='left')
 #print(uranai_db)
 
 
-# 結果を表示
+# 結果出力
 for i in uranai_db.itertuples():
     print(i.user_name + " " + i.uranai_explanation)
