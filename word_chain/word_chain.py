@@ -5,6 +5,8 @@ import pprint
 lines = sys.stdin.readlines()
 #print(lines)
 member_n, word_n, w_uttered_n = map(int,lines[0].rstrip().split(" "))
+member = [i+1 for i in range(member_n)]
+print(member)
 print(member_n)
 #print(word_n)
 #print(w_uttered_n)
@@ -25,15 +27,16 @@ def includ(word):
 
 # ルール2の判定
 # 最初の人以外の発言の頭文字は、直前の人の発言の最後の文字と一緒でなければならない
-def check_acronym(index_n, word):
-    if index_n >= 1:
+def check_acronym(index_n, word, pop):
+    if index_n >= 1 and pop == 0:
         #print("一つ前:", w_uttered[index_n-1])
         #print("一つ前の末尾: ", w_uttered[index_n-1][-1])
         #print("発言ワード: ", word)
         #print("発言ワードの頭文字: ", word[0])
-        return w_uttered[index_n-1][-1] == word[0]
+        return w_uttered[index_n-1][-1] == word[0], pop
     else:
-        return True
+        pop = 0
+        return True, pop
 
 # ルール3の判定
 # 今までに発言された単語を発言してはならない
@@ -47,36 +50,56 @@ def non_z(word):
     return word_l[-1] != "z"
 
 member_score = {}
-check = {}
+check = []
 u_log = []
-for i, w in enumerate(w_uttered):
-    #print("index: ", i)
+pop = 0
+i = 0
+for w in w_uttered:
+    if i >= member_n:
+        i = 0
+
+    print("index: ", i)
     #print("member_id: ", i%member_n)
-    #print(w)
+    print(w)
     #print(u_log)
     rule1 = includ(w)
-    rule2 = check_acronym(i,w)
+    rule2, pop = check_acronym(i,w, pop)
     rule3 = non_duplicated(w)
     rule4 = non_z(w)
-    check[i] = {"member_id": i%member_n,
-                "rule1":rule1,
-                "rule2":rule2,
-                "rule3":rule3,
-                "rule4":rule4}
+
+    print({"i": i,
+        "member_id": member[i],
+        "rule1":rule1,
+        "rule2":rule2,
+        "rule3":rule3,
+        "rule4":rule4})
 
     if all([rule1, rule3, rule4]):
         if rule2:
             print("all OK")
-            print("id: ", i%member_n)
+            #print("id: ", i%member_n)
+            
         else:
-            print("rule2: NG")
-            member_n -= 1
-            print("id: ", i%member_n)
+            #print("rule2: NG")
+            #member_n -= 1
+            #print("id: ", i%member_n)
+            print("pop: ", member.pop(i))
+            member_n = len(member)
+            i -= 1
+            pop = 1
     else:
         print("rule1, rule3, rule4: NG")
-        member_n -= 1
-        print("id: ", i%member_n)
+        #member_n -= 1
+        #print("id: ", i%member_n)
+        print("pop: ", member.pop(i))
+        member_n = len(member)
+        i -= 1
+        pop = 1
+    
+    u_log.append(w)        
+    i += 1
 
-print(member_n)
-#pprint.pprint(check)
+#print([k for k, v in member.items() if v == True])
+print(member)
+pprint.pprint(check)
 #pprint.pprint(member_score)
